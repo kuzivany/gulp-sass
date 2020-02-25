@@ -1,71 +1,26 @@
-# gulp-sass [![Build Status](https://travis-ci.org/dlmanning/gulp-sass.svg?branch=master)](https://travis-ci.org/dlmanning/gulp-sass) [![Join the chat at https://gitter.im/dlmanning/gulp-sass](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dlmanning/gulp-sass?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![npm version](https://badge.fury.io/js/gulp-sass.svg)](http://badge.fury.io/js/gulp-sass)
+# @kuzivany/gulp-sass
 
 Sass plugin for [Gulp](https://github.com/gulpjs/gulp).
 
-**_Before filing an issue, please make sure you have [Updated to the latest Gulp Sass](https://github.com/dlmanning/gulp-sass/wiki/Update-to-the-latest-Gulp-Sass) and have gone through our [Common Issues and Their Fixes](https://github.com/dlmanning/gulp-sass/wiki/Common-Issues-and-Their-Fixes) section._**
-
-# Support
-
-Only [Active LTS and Current releases][1] are supported.
-
-[1]: https://github.com/nodejs/Release#release-schedule
+**_A fork of [Gulp Sass](https://github.com/dlmanning/gulp-sass/tree/7ab018e3678729392978311eef2cb02754650960) using [Dart Sass][] as the default compiler._**
 
 # Install
 
+## yarn
+
 ```
-npm install node-sass gulp-sass --save-dev
+yarn add -D sass https://github.com/kuzivany/gulp-sass
+```
+
+## npm
+
+```
+npm install sass https://github.com/kuzivany/gulp-sass --save-dev
 ```
 
 # Basic Usage
 
 Something like this will compile your Sass files:
-
-```javascript
-'use strict';
-
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-
-sass.compiler = require('node-sass');
-
-gulp.task('sass', function () {
-  return gulp.src('./sass/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
-
-gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
-});
-```
-
-You can also compile synchronously, doing something like this:
-
-```javascript
-'use strict';
-
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-
-sass.compiler = require('node-sass');
-
-gulp.task('sass', function () {
-  return gulp.src('./sass/**/*.scss')
-    .pipe(sass.sync().on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
-
-gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
-});
-```
-
-You can choose whether to use [Dart Sass][] or [Node Sass][] by setting the `sass.compiler` property. Node Sass will be used by default, but it's strongly recommended that you set it explicitly for forwards-compatibility in case the default ever changes.
-
-[Dart Sass]: http://sass-lang.com/dart-sass
-[Node Sass]: https://github.com/sass/node-sass
-
-Note that when using Dart Sass, **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
 
 ```javascript
 'use strict';
@@ -78,7 +33,7 @@ sass.compiler = require('sass');
 
 gulp.task('sass', function () {
   return gulp.src('./sass/**/*.scss')
-    .pipe(sass({fiber: Fiber}).on('error', sass.logError))
+    .pipe(sass.sync({fiber: Fiber}).on('error', sass.logError))
     .pipe(gulp.dest('./css'));
 });
 
@@ -86,6 +41,13 @@ gulp.task('sass:watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 ```
+
+You can choose whether to use [Dart Sass][] or [Node Sass][] by setting the `sass.compiler` property. Dart Sass will be used by default, but it's strongly recommended that you set it explicitly for forwards-compatibility in case the default ever changes.
+
+[Dart Sass]: http://sass-lang.com/dart-sass
+[Node Sass]: https://github.com/sass/node-sass
+
+Note that when using Dart Sass, **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
 
 ## Options
 
