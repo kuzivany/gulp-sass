@@ -1,5 +1,5 @@
 {
-  "name": "gulp-sass",
+  "name": "@kuzivany/gulp-sass",
   "version": "4.0.2",
   "description": "Gulp plugin for sass",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dlmanning/gulp-sass"
+    "url": "git://github.com/kuzivany/gulp-sass"
   },
   "keywords": [
     "gulpplugin",
@@ -21,14 +21,14 @@
   "author": "David Manning",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dlmanning/gulp-sass/issues"
+    "url": "https://github.com/kuzivany/gulp-sass/issues"
   },
   "dependencies": {
     "chalk": "^2.3.0",
     "lodash": "^4.17.11",
-    "node-sass": "^4.8.3",
     "plugin-error": "^1.0.1",
     "replace-ext": "^1.0.0",
+    "sass": "^1.26.1",
     "strip-ansi": "^4.0.0",
     "through2": "^2.0.0",
     "vinyl-sourcemaps-apply": "^0.2.0"
